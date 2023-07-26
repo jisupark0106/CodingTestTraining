@@ -14,25 +14,24 @@ public class Main {
     String[] arg = br.readLine().split(" ");
 
     int N = Integer.parseInt(arg[0]);
-    int jumpIndex = Integer.parseInt(arg[1]) - 1;
+    int jump = Integer.parseInt(arg[1]) - 1;
 
     List<Integer> l = new ArrayList<>();
     for (int i = 0; i < N; i++) {
       l.add(i, i + 1);
     }
 
-    int removed = 0;
+    int index = 0;
     int[] result = new int[N];
     for (int i = 0; i < N; i++) {
-      removed += jumpIndex;
-      while (l.size() <= removed) {
-        removed = removed - l.size();
+      index += jump;
+      
+      if (l.size() <= index) {
+        index = index % l.size();
       }
-      result[i] = l.remove(removed);
+      result[i] = l.remove(index);
     }
 
     System.out.println(Arrays.toString(result).replace("[", "<").replace("]", ">"));
-
   }
-
 }
